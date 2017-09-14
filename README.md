@@ -63,5 +63,5 @@ node . YYYY-MM
 
 ```sh
 node . 2017-08
-cat report/201708.csv
+cat csv/201708.csv
 ```
