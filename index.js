@@ -20,6 +20,7 @@ var appId = config.ios.appId;
 // Android
 var dstFileName = monthLabel + '.csv';
 
+console.log('[GooglePlay] Downloading');
 var command = 'gsutil cp '
     + 'gs://' + bucketId + '/acquisition/retained_installers/'
     + 'retained_installers_' + packageName + '_'
@@ -63,10 +64,10 @@ var endDateLabel  = inMoment.endOf('month').format("YYYY-MM-DD");
 
 var instance = new Itunes(username, password, {
     errorCallback: function(e) {
-        console.log('Error logging in: ' + e);
+        console.log('[iTunesConnect] Error logging in: ' + e);
     },
     successCallback: function(d) {
-        console.log('Logged in');
+        console.log('[iTunesConnect] Logged in');
     }
 });
 
@@ -79,6 +80,10 @@ var query = AnalyticsQuery.metrics(appId, {
 }).date(beginDateLabel, endDateLabel);
 
 instance.request(query, function(error, result) {
+    if (error) {
+        console.error(error);
+        return;
+    }
     for (var i = 0; i < result.results[0].data.length; i++) {
         var pageViewRow = result.results[0].data[i];
         var unitRow = result.results[1].data[i];
@@ -123,6 +128,10 @@ instance.request(query, function(error, result) {
         ].join(','));
     });
     fs.writeFile(outFileName, contentRows.join("\n"), 'utf8', function (err) {
-        console.log(err);
+        if (err) {
+            console.error(err);
+        } else {
+            console.log('See ' + outFileName);
+        }
     });
 });
