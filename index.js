@@ -59,7 +59,7 @@ var Itunes = itc.Itunes;
 var AnalyticsQuery = itc.AnalyticsQuery;
 
 var beginDateLabel  = inMoment.format("YYYY-MM") + '-01';
-var endDateLabel  = inMoment.format("YYYY-MM") + '-31';
+var endDateLabel  = inMoment.endOf('month').format("YYYY-MM-DD");
 
 var instance = new Itunes(username, password, {
     errorCallback: function(e) {
