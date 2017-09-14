@@ -15,9 +15,11 @@ You can easily import output files into Google Spreadhsheets or Excel.
 - Android Visitors
 - Android Installers
 - Android CVR
-- iOS Visitors
+- iOS Visitors (Page Views)
 - iOS Installers
 - iOS CVR
+
+> iOS app installs directly from the listing page are not included in `iOS Visitors`.
 
 # Installation
 
@@ -27,7 +29,9 @@ You can easily import output files into Google Spreadhsheets or Excel.
 
 ## Install Dependencies
 
-> npm install
+```sh
+npm install
+```
 
 ## Create Config File
 
@@ -49,11 +53,15 @@ You can easily import output files into Google Spreadhsheets or Excel.
 
 # Usage
 
-> node . YYYY-MM
+```sh
+node . YYYY-MM
+```
 
 `YYYY-MM`: year and month (default is this month)
 
 ## Example
 
-> % node . 2017-08
-> % cat report/201708.csv
+```sh
+node . 2017-08
+cat report/201708.csv
+```
